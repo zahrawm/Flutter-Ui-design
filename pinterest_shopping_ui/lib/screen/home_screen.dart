@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pinterest_shopping_ui/model/button.details.dart';
+import 'package:pinterest_shopping_ui/widgets/girl.dart';
+import 'package:pinterest_shopping_ui/widgets/items.dart';
+import 'package:pinterest_shopping_ui/widgets/shop.dart';
 
 class HomeScreen extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
@@ -9,6 +13,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.home, color: Colors.white24),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.bookmark)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,6 +63,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Search bar row
               Row(
                 children: [
                   Expanded(
@@ -49,10 +71,7 @@ class HomeScreen extends StatelessWidget {
                       controller: searchController,
                       decoration: InputDecoration(
                         labelText: 'Search',
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey[600],
-                        ), // Slightly darker grey for the search icon
+                        prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -83,67 +102,36 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20),
-              Container(
-                padding: EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(230, 116, 156, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/shop.jpg',
-                        width: 140,
-                        height: 140,
-                        fit: BoxFit.cover,
+              Shop(),
+              SizedBox(height: 10),
+
+              SizedBox(
+                height: 40,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: buttonData.length,
+                  itemBuilder: (context, index) {
+                    final data = buttonData[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: MyButton(
+                        color: data['color'],
+                        text: data['text'],
+                        width: 100,
+                        height: 35,
+                        textStyle: TextStyle(
+                          color: data['textColor'],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Big Sale",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Get ready',
-                            style: TextStyle(
-                              color: const Color.fromRGBO(228, 220, 220, 1),
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Look sharp',
-                            style: TextStyle(
-                              color: const Color.fromRGBO(228, 220, 220, 1),
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            '50% OFF',
-                            style: TextStyle(
-                              color: Color.fromRGBO(228, 220, 220, 1),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
+              SizedBox(height: 10),
+
+              Expanded(child: GridViewGallery()),
             ],
           ),
         ),
