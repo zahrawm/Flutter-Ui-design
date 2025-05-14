@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
         height: 45,
         decoration: BoxDecoration(
           color:
-              isSelected
+              isSelected  
                   ? const Color.fromRGBO(230, 116, 156, 1)
                   : Colors.transparent,
           shape: BoxShape.circle,
