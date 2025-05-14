@@ -13,21 +13,32 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.home, color: Colors.white24),
-                ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.bookmark)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-              ],
-            ),
+        bottomNavigationBar: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                blurRadius: 10,
+                spreadRadius: 1,
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNavItem(Icons.home, isSelected: false, onTap: () {}),
+              _buildNavItem(Icons.bookmark, isSelected: true, onTap: () {}),
+              _buildNavItem(
+                Icons.shopping_cart,
+                isSelected: false,
+                onTap: () {},
+              ),
+              _buildNavItem(Icons.person, isSelected: false, onTap: () {}),
+            ],
           ),
         ),
         appBar: AppBar(
@@ -134,6 +145,33 @@ class HomeScreen extends StatelessWidget {
               Expanded(child: GridViewGallery()),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(
+    IconData icon, {
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(
+          color:
+              isSelected
+                  ? const Color.fromRGBO(230, 116, 156, 1)
+                  : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          icon,
+          color:
+              isSelected ? Colors.white : const Color.fromRGBO(58, 58, 58, 1),
+          size: 24,
         ),
       ),
     );
