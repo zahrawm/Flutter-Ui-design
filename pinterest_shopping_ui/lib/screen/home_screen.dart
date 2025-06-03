@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pinterest_shopping_ui/model/button.details.dart';
+import 'package:pinterest_shopping_ui/screen/decor_screen.dart';
 import 'package:pinterest_shopping_ui/widgets/girl.dart';
-import 'package:pinterest_shopping_ui/widgets/items.dart';
+import 'package:pinterest_shopping_ui/widgets/button.dart';
 import 'package:pinterest_shopping_ui/widgets/shop.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -30,7 +31,20 @@ class HomeScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildNavItem(Icons.home, isSelected: false, onTap: () {}),
+              _buildNavItem(
+                Icons.home,
+                isSelected: false,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return DecorScreen();
+                      },
+                    ),
+                  );
+                },
+              ),
               _buildNavItem(Icons.bookmark, isSelected: true, onTap: () {}),
               _buildNavItem(
                 Icons.shopping_cart,
@@ -74,7 +88,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar row
               Row(
                 children: [
                   Expanded(
@@ -162,7 +175,7 @@ class HomeScreen extends StatelessWidget {
         height: 45,
         decoration: BoxDecoration(
           color:
-              isSelected  
+              isSelected
                   ? const Color.fromRGBO(230, 116, 156, 1)
                   : Colors.transparent,
           shape: BoxShape.circle,
