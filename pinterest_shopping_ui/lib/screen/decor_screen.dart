@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinterest_shopping_ui/screen/card_screen.dart';
 
 import 'package:pinterest_shopping_ui/widgets/blazer.dart';
 
@@ -65,7 +66,16 @@ class DecorScreen extends StatelessWidget {
                   const SizedBox(width: 20),
 
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return CardScreen();
+                          },
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 230, 202, 202),
                       padding: const EdgeInsets.all(16),
